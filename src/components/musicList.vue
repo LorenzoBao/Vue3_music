@@ -56,7 +56,7 @@ name: "musicList",
       })
       onUpdated(()=>{
         var swiper = new Swiper('#musicSwiper', {
-          slidesPerView: 3,
+          slidesPerView: 3.2,
           spaceBetween: 10,
 
         });

@@ -2,7 +2,7 @@
   <div class="playList">
     <div class="playList-top">
 
-     <div class="left">
+     <div class="left" >
        <svg class="icon" aria-hidden="true">
        <use xlink:href="#icon-bofang1"></use>
      </svg>
@@ -19,8 +19,8 @@
     </div>
 
     <div class="list">
-      <div class="playItem" v-for="(item,index) in playlist.tracks" :key="index">
-        <div class="left">
+      <div class="playItem" v-for="(item,index) in playlist.tracks" :key="index" @click="pushMusic(index) ">
+        <div class="left" >
           <div class="index">{{index+1}}</div>
           <div class="content">
             <div class="title">{{item.name}}</div>
@@ -46,9 +46,18 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
 name: "playList",
+  props:['playlist'],
   methods:{
+  pushMusic(index){
+    this.$store.commit('setPlayIndex',index)
+    this.$store.dispatch('reqLyric',{id:this.$store.state.playList[this.$store.state.playCurrentIndex].id})
+  },
+
+
+
      changeValue(num){
       let res=0
       if (num>=100000000){
@@ -59,9 +68,10 @@ name: "playList",
         res = res.toFixed(2)+'万'
       }
       return res
-    }
+    },
+    ...mapMutations(['setPlayIndex'])
   },
-  props:['playlist'],
+
 }
 </script>
 

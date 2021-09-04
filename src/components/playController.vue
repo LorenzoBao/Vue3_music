@@ -1,7 +1,7 @@
 <template>
   <div class="playController">
 
-    <div class="left">
+    <div class="left" @click="show =! show">
       <img :src="playList[playCurrentIndex].al.picUrl" alt="">
       <div class="content">
         <div class="title">{{playList[playCurrentIndex].al.name}}</div>
@@ -24,6 +24,8 @@
 
     </div>
 
+    <playMusic :play="play" :paused="paused" v-show="show"  @back="show=!show" :playDetil="playList[playCurrentIndex]"></playMusic>
+
     <audio ref="audio" :src="`https://music.163.com/song/media/outer/url?id=${playList[playCurrentIndex].id}.mp3`"></audio>
 
     
@@ -32,28 +34,62 @@
 
 <script>
 import {mapState,mapMutations} from 'vuex'
+import $store from '../store/index'
+import playMusic from "@/components/playMusic";
 export default {
 name: "playController",
+  components:{
+  playMusic
+  },
   data(){
   return{
-    paused:false
+    paused:false,
+    show:false
+
   }
   },
   computed:{
     ...mapState(['playList','playCurrentIndex'])
   },
+  mounted() {
+    this.$store.dispatch('reqLyric',{id:this.playList[this.playCurrentIndex].id})
+    this.updataTime();
+  },
+  updated() {
+    this.updataTime();
+    this.$store.dispatch('reqLyric',{id:this.playList[this.playCurrentIndex].id})
 
+  },
+  watch:{
+    playCurrentIndex(){
+     this.$nextTick(()=>{
+       this.$refs.audio.play()
+       this.paused=true
+     })
+
+    }
+
+
+
+
+},
   methods:{
+
+    updataTime(){
+      this.$store.state.intervalId=setInterval(()=>{
+        this.$store.commit('setCurrentTime',this.$refs.audio.currentTime);
+      },1000)
+    },
     play(){
       if(this.$refs.audio.paused){
         this.$refs.audio.play()
         this.paused=true
+        this.updataTime();
       }else{
         this.$refs.audio.pause()
         this.paused=false
-
+        clearInterval(this.$store.state.intervalId)
       }
-
     }
   }
 
@@ -62,6 +98,7 @@ name: "playController",
 
 <style scoped lang="less">
   .playController{
+    z-index: 1;
     background: #fff;
     height: 1rem;
     width: 7.5rem;

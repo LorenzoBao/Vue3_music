@@ -10,3 +10,10 @@ export function getMusicList(limit=10) {
 export function getPlaylistDetail(id) {
     return  axios.get(`${baseUrl}/playlist/detail?id=${id}`)
 }
+export function getLyric(id) {
+    return  axios.get(`${baseUrl}/lyric?id=${id}`)
+}
+export function searchMusic(keyWord) {
+    return  axios.get(`${baseUrl}/search?keywords=${keyWord}`)
+}
+export default {getBanner,getMusicList,getPlaylistDetail,getLyric,searchMusic}

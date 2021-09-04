@@ -8,7 +8,7 @@
       </div>
 
       <div class="topCenter">
-        <span class="navBtn ">我的</span>
+        <span class="navBtn" @click="$router.push('/Me')">我的</span>
         <span class="navBtn active">发现</span>
         <span class="navBtn">云村</span>
         <span class="navBtn">视频</span>
@@ -16,7 +16,7 @@
       </div>
 
       <div class="topRight">
-        <svg class="icon search" aria-hidden="true">
+        <svg class="icon search" aria-hidden="true" @click="$router.push('/Search')">
           <use xlink:href="#icon-icon- "></use>
         </svg>
       </div>
