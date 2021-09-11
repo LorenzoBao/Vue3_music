@@ -31,6 +31,9 @@ import musicList from '@/components/musicList.vue'
   computed: {
 
   },
+  mounted() {
+    console.log(this.$store.state.user.userDetail.data.profile.avatarUrl);
+  }
 
 
 })

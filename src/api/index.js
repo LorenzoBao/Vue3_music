@@ -16,4 +16,10 @@ export function getLyric(id) {
 export function searchMusic(keyWord) {
     return  axios.get(`${baseUrl}/search?keywords=${keyWord}`)
 }
-export default {getBanner,getMusicList,getPlaylistDetail,getLyric,searchMusic}
+export function phoneLogin(phone,passwoed) {
+    return  axios.get(`${baseUrl}/login/cellphone?phone=${phone}&password=${passwoed}`)
+}
+export function getuserDetail(uid) {
+    return  axios.get(`${baseUrl}/user/detail?uid=${uid}`)
+}
+export default {getBanner,getMusicList,getPlaylistDetail,getuserDetail,getLyric,searchMusic,phoneLogin}

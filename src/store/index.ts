@@ -1,7 +1,6 @@
-
 import api from '../api/index.js'
 
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 
 export default createStore({
   state: {
@@ -24,7 +23,8 @@ export default createStore({
     intervalId:0,
     user:{
       isLogin:false,
-      username:"未登录"
+      account:{},
+      userDetail:{}
     },
   },
   getters:{
@@ -68,12 +68,27 @@ export default createStore({
     setCurrentTime(state,value){
       state.currentTime=value
     },
+    setUser(state,value){
+      state.user=value
+    },
   },
   actions: {
     async reqLyric(content,payload){
-
       let res=  await api.getLyric(payload.id)
       content.commit('setLyric',res.data.lrc.lyric)
+    },
+    async login(content,payload){
+      let res=  await api.phoneLogin(payload.phone,payload.password)
+      if (res.data.code===200){
+        content.state.user.isLogin = true
+        content.state.user.account = res.data.account
+        content.state.user.userDetail=await api.getuserDetail(res.data.account.id)
+        localStorage.userData=JSON.stringify(content.state.user)
+        console.log(content.state.user.userDetail);
+        content.commit('setUser',content.state.user)
+      }
+      return res
+
     },
 
   },

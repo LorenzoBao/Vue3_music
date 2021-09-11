@@ -12,6 +12,11 @@ export default {
   name: 'App',
   components:{
     playController
+  },
+  mounted() {
+    let userData = JSON.parse(localStorage.userData)
+    this.$store.commit('setUser',userData)
+
   }
 
 
