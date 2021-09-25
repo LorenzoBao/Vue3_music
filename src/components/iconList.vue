@@ -34,25 +34,28 @@
 
 <script>
 export default {
-name: "iconList"
+  name: "iconList"
 }
 </script>
 
 <style lang="less" scoped>
-.iconList{
+.iconList {
   width: 7.5rem;
   display: flex;
   justify-content: space-between;
   padding: 0.4rem;
-  .iconItem{
+
+  .iconItem {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .icon{
+
+    .icon {
       width: 1.2rem;
       height: 1.2rem;
-       }
-    span{
+    }
+
+    span {
       font-size: 0.26rem;
     }
   }

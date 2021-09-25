@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-   <topNav></topNav>
+    <topNav></topNav>
     <swiperCom></swiperCom>
     <iconList></iconList>
     <musicList></musicList>
@@ -8,37 +8,31 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import {Options, Vue} from 'vue-class-component';
 import topNav from '@/components/topNav.vue';
 import swiperCom from '@/components/swiperCom.vue'
 import iconList from '@/components/iconList.vue'
 import musicList from '@/components/musicList.vue'
+
 @Options({
   components: {
-
     topNav,
     swiperCom,
     iconList,
     musicList
-
-
   },
-  data(){
-    return{
-
-    }
+  data() {
+    return {}
   },
-  computed: {
-
-  },
+  computed: {},
   mounted() {
     console.log(this.$store.state.user.userDetail.data.profile.avatarUrl);
   }
 
-
 })
 
-export default class Home extends Vue {}
+export default class Home extends Vue {
+}
 </script>
 <style lang="less" scoped>
 

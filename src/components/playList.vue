@@ -2,31 +2,31 @@
   <div class="playList">
     <div class="playList-top">
 
-     <div class="left" >
-       <svg class="icon" aria-hidden="true">
-       <use xlink:href="#icon-bofang1"></use>
-     </svg>
-       <div class="text">
-         <div class="title">播放全部</div>
-         <div class="num">(共{{playlist.tracks.length}}首)</div>
-       </div>
-     </div>
-
-        <div class="btn">
-          + 收藏({{  changeValue(playlist.subscribedCount)}})
+      <div class="left">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-bofang1"></use>
+        </svg>
+        <div class="text">
+          <div class="title">播放全部</div>
+          <div class="num">(共{{ playlist.tracks.length }}首)</div>
         </div>
+      </div>
+
+      <div class="btn">
+        + 收藏({{ changeValue(playlist.subscribedCount) }})
+      </div>
 
     </div>
 
     <div class="list">
       <div class="playItem" v-for="(item,index) in playlist.tracks" :key="index" @click="pushMusic(index) ">
-        <div class="left" >
-          <div class="index">{{index+1}}</div>
+        <div class="left">
+          <div class="index">{{ index + 1 }}</div>
           <div class="content">
-            <div class="title">{{item.name}}</div>
+            <div class="title">{{ item.name }}</div>
             <div class="anthor">
-              <span class="tag" v-for="(tag,i) in playlist.tags" :key="i">{{tag}}</span>
-              <span>{{item.al.name}}</span>
+              <span class="tag" v-for="(tag,i) in playlist.tags" :key="i">{{ tag }}</span>
+              <span>{{ item.al.name }}</span>
 
             </div>
           </div>
@@ -47,25 +47,25 @@
 
 <script>
 import {mapMutations} from 'vuex'
+
 export default {
-name: "playList",
-  props:['playlist'],
-  methods:{
-  pushMusic(index){
-    this.$store.commit('setPlayIndex',index)
-    this.$store.dispatch('reqLyric',{id:this.$store.state.playList[this.$store.state.playCurrentIndex].id})
-  },
+  name: "playList",
+  props: ['playlist'],
+  methods: {
+    pushMusic(index) {
+      this.$store.commit('setPlayIndex', index)
+      this.$store.dispatch('reqLyric', {id: this.$store.state.playList[this.$store.state.playCurrentIndex].id})
+    },
 
 
-
-     changeValue(num){
-      let res=0
-      if (num>=100000000){
-        res = num/100000000
-        res = res.toFixed(2)+'亿'
-      }else if(num>=10000){
-        res = num/10000
-        res = res.toFixed(2)+'万'
+    changeValue(num) {
+      let res = 0
+      if (num >= 100000000) {
+        res = num / 100000000
+        res = res.toFixed(2) + '亿'
+      } else if (num >= 10000) {
+        res = num / 10000
+        res = res.toFixed(2) + '万'
       }
       return res
     },
@@ -76,7 +76,7 @@ name: "playList",
 </script>
 
 <style scoped lang="less">
-.playList{
+.playList {
   width: 7.5rem;
   padding: 0 0.4rem;
   background: #fff;
@@ -84,36 +84,42 @@ name: "playList",
   border-top-right-radius: 0.3rem;
   margin-top: 0.4rem;
 
-  .playList-top{
+  .playList-top {
     display: flex;
     justify-content: space-between;
     height: 1rem;
     align-items: center;
-    .left{
+
+    .left {
       display: flex;
       align-items: center;
-      .icon{
+
+      .icon {
         width: 0.4rem;
         height: 0.4rem;
 
       }
-      .title{
+
+      .title {
         font-size: 0.34rem;
         font-weight: 560;
 
       }
-      .num{
+
+      .num {
         font-size: 0.28rem;
         color: #666;
       }
-      .text{
+
+      .text {
         display: flex;
         align-items: center;
         margin-left: 0.3rem;
       }
 
     }
-    .btn{
+
+    .btn {
       font-size: 0.3rem;
       color: #FFF;
       background: orangered;
@@ -125,29 +131,35 @@ name: "playList",
       line-height: 0.6rem;
     }
   }
-  .list{
-    .playItem{
+
+  .list {
+    .playItem {
       display: flex;
       justify-content: space-between;
       height: 1.2rem;
       align-items: center;
-      .left{
+
+      .left {
         display: flex;
         align-items: center;
         color: #666;
-        .index{
+
+        .index {
           width: 0.3rem;
         }
-        .content{
+
+        .content {
           margin-left: 0.4rem;
         }
-        .title{
+
+        .title {
           font-size: 0.3rem;
           font-weight: 900;
           color: #000;
           margin-bottom: 0.05rem;
         }
-        .tag{
+
+        .tag {
           font-size: 0.2rem;
           color: orangered;
           border: 1px solid orangered;
@@ -155,12 +167,14 @@ name: "playList",
 
 
         }
-        .author{
+
+        .author {
           color: #666;
         }
       }
-      .right{
-        .icon{
+
+      .right {
+        .icon {
           margin: 0 0.15rem;
           margin-right: 0.1rem;
           fill: #aaa;

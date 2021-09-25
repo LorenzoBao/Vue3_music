@@ -10,12 +10,12 @@ import playController from "@/components/playController";
 
 export default {
   name: 'App',
-  components:{
+  components: {
     playController
   },
   mounted() {
     let userData = JSON.parse(localStorage.userData)
-    this.$store.commit('setUser',userData)
+    this.$store.commit('setUser', userData)
 
   }
 
@@ -24,17 +24,19 @@ export default {
 </script>
 
 <style lang="less">
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: '微软雅黑',serif;
+  font-family: '微软雅黑', serif;
 }
-.icon{
+
+.icon {
   width: 0.3rem;
   height: 0.3rem;
 }
-a{
+
+a {
   color: #333;
   text-decoration: none;
 }

@@ -6,10 +6,11 @@
 
 <script>
 import SearchTop from '@/components/SearchTop.vue';
+
 export default {
-name: "Search",
-  components:{
-  SearchTop
+  name: "Search",
+  components: {
+    SearchTop
   }
 }
 </script>

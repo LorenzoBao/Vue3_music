@@ -9,14 +9,15 @@
     <div class="mlist">
       <div class="swiper-container" id="musicSwiper">
         <div class="swiper-wrapper">
-          <router-link :to="{path:'/listview',query:{id:item.id}}" class="swiper-slide" v-for="(item,index) in state.musicList" :key="index">
+          <router-link :to="{path:'/listview',query:{id:item.id}}" class="swiper-slide"
+                       v-for="(item,index) in state.musicList" :key="index">
             <img :src="item.picUrl" :alt="item.name">
-            <span class="name">{{item.name}}</span>
+            <span class="name">{{ item.name }}</span>
             <div class="count">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-bofangsanjiaoxing"></use>
               </svg>
-              <span>{{ changeValue(item.playCount)}}</span>
+              <span>{{ changeValue(item.playCount) }}</span>
             </div>
           </router-link>
 
@@ -33,60 +34,64 @@
 import Swiper from 'swiper'
 import 'swiper/css/swiper.css'
 import {getMusicList} from "@/api";
-import {reactive,onMounted,onUpdated} from 'vue'
+import {reactive, onMounted, onUpdated} from 'vue'
 import store from '@/store/index'
+
 export default {
-name: "musicList",
-  setup(){
-  let state = reactive({musicList:[]})
-    function changeValue(num){
-      let res=0
-      if (num>=100000000){
-        res = num/100000000
-        res = res.toFixed(2)+'亿'
-      }else if(num>=10000){
-        res = num/10000
-        res = res.toFixed(2)+'万'
+  name: "musicList",
+  setup() {
+    let state = reactive({musicList: []})
+
+    function changeValue(num) {
+      let res = 0
+      if (num >= 100000000) {
+        res = num / 100000000
+        res = res.toFixed(2) + '亿'
+      } else if (num >= 10000) {
+        res = num / 10000
+        res = res.toFixed(2) + '万'
       }
       return res
     }
-      onMounted(async ()=>{
-        let res= await getMusicList()
-        state.musicList=res.data.result;
-      })
-      onUpdated(()=>{
-        var swiper = new Swiper('#musicSwiper', {
-          slidesPerView: 3.2,
-          spaceBetween: 10,
 
-        });
-      })
-    return{
+    onMounted(async () => {
+      let res = await getMusicList()
+      state.musicList = res.data.result;
+    })
+    onUpdated(() => {
+      var swiper = new Swiper('#musicSwiper', {
+        slidesPerView: 3.2,
+        spaceBetween: 10,
+
+      });
+    })
+    return {
       state,
       changeValue
     }
   },
 
 
-
-
 }
 </script>
 
 <style scoped lang="less">
-.musicList{
+.musicList {
   width: 7.5rem;
   padding: 0 0.4rem;
-  .musicList-top{
+
+  .musicList-top {
     display: flex;
     justify-content: space-between;
     height: 1rem;
     align-items: center;
-    .title{
+
+    .title {
       font-size: 0.4rem;
       font-weight: 900;
     }
-    .more{
+
+    .more {
       border: 1px solid #cccccc;
       border-radius: 0.2rem;
       font-size: 0.24rem;
@@ -96,26 +101,31 @@ name: "musicList",
       line-height: 0.5rem;
     }
   }
-  .mlist{
-    .swiper-container{
+
+  .mlist {
+    .swiper-container {
       width: 100%;
       height: 3rem;
-      .swiper-slide{
+
+      .swiper-slide {
         display: flex;
         flex-direction: column;
-        img{
+
+        img {
           width: 100%;
           height: auto;
           border-radius: 0.1rem;
 
         }
-        .name{
+
+        .name {
           height: 0.6rem;
           width: 100%;
           font-size: 0.24rem;
           line-height: 0.4rem;
         }
-        .count{
+
+        .count {
           position: absolute;
           right: 0.1rem;
           top: 0.1rem;
@@ -123,13 +133,14 @@ name: "musicList",
           color: #ccc;
           display: flex;
           align-items: center;
-          .icon{
+
+          .icon {
             fill: #ccc;
           }
         }
       }
     }
 
-    }
+  }
 }
 </style>
